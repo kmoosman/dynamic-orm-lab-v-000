@@ -13,8 +13,9 @@ class Student < InteractiveRecord
     DB[:conn].execute(sql, name)
   end
 
-  def self.find_by(name:, value:)
-    sql = "SELECT * FROM #{self.table_name} WHERE name = ?"
+  def self.find_by(id)
+    sql = "SELECT * FROM #{self.table_name} WHERE name = ?
+    OR id =?”, [id, id.to_i]).first"
     DB[:conn].execute(sql, value)
   end
 
